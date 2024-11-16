@@ -1,0 +1,154 @@
+<body>
+  <section class="container" *ngIf="isSending===false && wantToDelete===false && isDeleting===false">
+    <header>Profilo</header>
+    <form class="form" name="editForm" role="form" novalidate [formGroup]="userForm">
+      <!-- Prima colonna -->
+      <div class="insert">
+        <label>Nome</label>
+        <input id="name" type="text" placeholder="Inserisci nome" formControlName="name" [readOnly]="!modify"
+          [ngStyle]="{'background-color': !modify ? 'white' : null, border: !modify ? '1px solid #cfd8dc': null }"
+          [ngStyle]="nameStyle()" />
+        <span class="error" *ngIf="(userFormControl.name.touched || submitted) && userFormControl.name.invalid">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">Nome mancante</p>
+        </span>
+      </div>
+      <div class="insert">
+        <label>Cognome</label>
+        <input id="surname" type="text" placeholder="Inserisci cognome" formControlName="surname" [readOnly]="!modify"
+          [ngStyle]="{'background-color': !modify ? 'white' : null, border: !modify ? '1px solid #cfd8dc': null }"
+          [ngStyle]="surnameStyle()" />
+        <span class="error" *ngIf="(userFormControl.surname.touched || submitted) && userFormControl.surname.invalid">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">Cognome mancante</p>
+        </span>
+      </div>
+      <!-- Seconda colonna -->
+      <div class="insert">
+        <label>Data di nascita</label>
+        <input id="date" type="date" placeholder="Inserisci data di nascita" formControlName="birth"
+          [readOnly]="!modify"
+          [ngStyle]="{'background-color': !modify ? 'white' : null, border: !modify ? '1px solid #cfd8dc': null }"
+          [ngStyle]="birthStyle()" />
+        <span class="error" *ngIf="(userFormControl.birth.touched || submitted) && userFormControl.birth.invalid">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">Data non valida</p>
+        </span>
+      </div>
+      <div class="insert">
+        <label>Codice fiscale</label>
+        <input id="cf" type="text" placeholder="Inserisci codice fiscale" formControlName="cf" [readOnly]="!modify"
+          [ngStyle]="{'background-color': !modify ? 'white' : null, border: !modify ? '1px solid #cfd8dc': null }"
+          [ngStyle]="cfStyle()" />
+        <span class="error" *ngIf="(userFormControl.cf.touched || submitted) && userFormControl.cf.invalid">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">Codice fiscale non valido</p>
+        </span>
+      </div>
+      <div class="control" *ngIf="show">
+        <div class="button">
+          <button type="button" class="logout" (click)="doLogout()">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined"> logout</span>
+              Logout
+            </a>
+          </button>
+        </div>
+        <div class="button">
+          <button type="button" class="modify" (click)="doModify()">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined"> edit</span>
+              Modifica
+            </a>
+          </button>
+        </div>
+      </div>
+      <div class="control-update" *ngIf="modify">
+        <div class="button">
+          <button type="button" class="delete" (click)="askDelete()">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined"> delete</span>
+              Elimina
+            </a>
+          </button>
+        </div>
+        <div class="button">
+          <button type="button" class="update" (click)="formSubmit()">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined"> upgrade</span>
+              Aggiorna
+            </a>
+          </button>
+        </div>
+        <div class="button">
+          <button type="button" class="abort" (click)="doAbort()">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined"> close</span>
+              Annulla
+            </a>
+          </button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <!-- Sezione messaggio di successo o errore per l'aggiornamento -->
+  <section class="containermessage" *ngIf="isSending && isUpdating">
+    <div class="message">
+      <h1>{{messageTitle}}</h1>
+      <p>{{messageBody}}</p>
+    </div>
+    <button class="close" (click)="doAbort()" *ngIf="isSuccess===true">
+      <a class="icon-text-button">
+        <span class="material-symbols-outlined">close</span>
+        Indietro
+      </a>
+    </button>
+    <button class="close" (click)="doReload()" *ngIf="isError===true">
+      <a class="icon-text-button">
+        <span class="material-symbols-outlined">close</span>
+        Indietro
+      </a>
+    </button>
+  </section>
+
+  <!-- Sezione per confermare l'eliminazione -->
+  <section class="containermessage" *ngIf="wantToDelete && isDeleting===false">
+    <div class="message">
+      <h1>Vuoi eliminare il tuo account?</h1>
+      <p>Non potrai più ripristinarlo in futuro!</p>
+    </div>
+    <button class="close" (click)="doAbort()">
+      <a class="icon-text-button">
+        <span class="material-symbols-outlined">close</span>
+        Indietro
+      </a>
+    </button>
+    <button class="askdelete" (click)="doDelete()">
+      <a class="icon-text-button">
+        <span class="material-symbols-outlined">delete</span>
+        Elimina
+      </a>
+    </button>
+  </section>
+
+  <!-- Sezione messaggio di successo o errore per l'eliminazione -->
+  <section class="containermessage" *ngIf="isSending && isDeleting">
+    <div class="message">
+      <h1>{{messageTitle}}</h1>
+      <p>{{messageBody}}</p>
+    </div>
+    <button class="close" (click)="doLogout()" *ngIf="isSuccess===true">
+      <a class="icon-text-button">
+        <span class="material-symbols-outlined">logout</span>
+        Chiudi
+      </a>
+    </button>
+    <button class="close" (click)="doReload()" *ngIf="isError===true">
+      <a class="icon-text-button">
+        <span class="material-symbols-outlined">close</span>
+        Indietro
+      </a>
+    </button>
+  </section>
+</body>

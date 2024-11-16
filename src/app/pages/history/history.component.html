@@ -1,0 +1,78 @@
+<!-- Corpo della pagina -->
+
+<body>
+
+  <!-- Sezione mostrata se nessuna segnalazione da pulire è presente -->
+  <div class="section" *ngIf="empty">
+    <div class="empty">
+      <header>Non è presente nessuna segnalazione 🙂</header>
+    </div>
+  </div>
+
+  <!-- Sezione mostrata se sono presenti segnalazioni -->
+  <div class="box" *ngIf="notempty">
+    <div class="container" id="container">
+      <div class="top"></div>
+      <div class="show" *ngFor="let report of reports; index as i">
+        <app-card [data]="report" [typelist]="typelist" [sizelist]="sizelist">
+        </app-card>
+      </div>
+
+      <!-- Spazio divisione tra card e paginazione -->
+      <div class="toppagination"></div>
+
+      <!-- Paginazione -->
+      <div class="pagination" *ngIf="numPages>1">
+        <button type="button" class="pagebutton">
+          &laquo;
+        </button>
+        <button type="button" class="pagebutton" *ngFor="let n of numSequence(numPages); index as i"
+          (click)="getReports(i+1, getOrderBy())"
+          [ngStyle]="{'background-color': i+1===currentPage ? '#009688' : null}">
+          {{i+1}}
+        </button>
+        <button type="button" class="pagebutton">
+          &raquo;
+        </button>
+      </div>
+
+      <!-- Spazio divisione tra paginazione e bordo inferiore -->
+      <div class="bottom"></div>
+    </div>
+  </div>
+
+</body>
+
+<!-- Topbar utilizzata per i pulsanti interattivi della mappa -->
+<div class="topbar">
+  <div class="topbar-button-control">
+    <a class="topbar-button" (click)="getReports(1, 'latest')" (click)="setOrderBy('latest')" *ngIf="isAdmin===false">
+      <span class="material-symbols-outlined"> reorder</span>
+      Tutte
+    </a>
+    <a class="topbar-button" (click)="getReports(1, 'cleaned')" (click)="setOrderBy('cleaned')" *ngIf="isAdmin===false">
+      <span class="material-symbols-outlined"> done</span>
+      Pulite
+    </a>
+    <a class="topbar-button" (click)="getReports(1, 'not_cleaned')" (click)="setOrderBy('not_cleaned')" *ngIf="isAdmin===false">
+      <span class="material-symbols-outlined"> close</span>
+      Non pulite
+    </a>
+    <a class="topbar-button" (click)="getReports(1, 'latest')" (click)="setOrderBy('latest')" *ngIf="isAdmin===false">
+      <span class="material-symbols-outlined"> arrow_downward</span>
+      Più recenti
+    </a>
+    <a class="topbar-button" (click)="getReports(1, 'oldest')" *ngIf="isAdmin===false">
+      <span class="material-symbols-outlined"> arrow_upward</span>
+      Meno recenti
+    </a>
+    <a class="topbar-button" (click)="getAdminReports(1, 'latest')" (click)="setOrderBy('latest')" *ngIf="isAdmin===true">
+      <span class="material-symbols-outlined"> arrow_downward</span>
+      Più recenti
+    </a>
+    <a class="topbar-button" (click)="getAdminReports(1, 'oldest')" (click)="setOrderBy('latest')" *ngIf="isAdmin===true">
+      <span class="material-symbols-outlined"> arrow_upward</span>
+      Meno recenti
+    </a>
+  </div>
+</div>

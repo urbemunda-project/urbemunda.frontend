@@ -1,0 +1,79 @@
+<!-- Corpo della pagina -->
+
+<body>
+
+  <!-- Google Maps -->
+  <div class="container" id="map">
+    <google-map #myGoogleMap height="100%" width="100%" [zoom]="zoom" [center]="center" [options]="options">
+
+      <!-- Marker mostrati sulla mappa -->
+      <map-marker #markerElem="mapMarker" *ngFor="let marker of markers" [position]="marker.position"
+        [label]="marker.label" [title]="marker.title" [options]="marker.options"
+        (mapClick)="openInfo(markerElem, marker.title, marker.info)" (positionChanged)="resetClusterReady()">
+      </map-marker>
+
+      <!-- Card delle segnalazioni mostrate al click sul marker -->
+      <map-info-window>
+
+        <!-- Messaggio mostrato durante il caricamento del cluster -->
+        <div class="cardmessage" id="cardmessage" *ngIf="clusterNotReady">
+          <div class="message">
+            <h1>Caricamento in corso</h1>
+            <p>🕔</p>
+          </div>
+        </div>
+        <div class="card" *ngIf="clusterReady && isSending === false">
+          <div class="section">
+            <img class="card-image" src="data:image/png;base64, {{fileImage}}" alt="Immagine">
+            <p id="description">{{description}}</p>
+            <div class="row">
+              <p id="size">{{trashSize}}</p>
+              <p id="type" [ngStyle]="{'background-color' : getColor(trashType)}">{{trashType}}</p>
+            </div>
+            <div class="row">
+              <p id="description">Quantità</p>
+              <p id="reportcount">{{reportCount}}</p>
+            </div>
+          </div>
+          <button id="cleanbutton" *ngIf="isAdmin">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined" (click)="markClean(infoId)">mop</span>
+              Pulisci
+            </a>
+          </button>
+        </div>
+
+        <!-- Card per la notifica della pulizia segnalazione -->
+        <div class="cardmessage" id="cardmessage" *ngIf="isSending">
+          <div class="uselessspace" *ngIf="isSending===true && isSent===false"></div>
+          <div class="message">
+            <h1>{{messageTitle}}</h1>
+            <p>{{messageBody}}</p>
+          </div>
+          <div class="uselessspace" *ngIf="isSending===true && isSent===false"></div>
+          <button class="close" (click)="doReload()" *ngIf="isSent===true">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined">close</span>
+              Chiudi
+            </a>
+          </button>
+        </div>
+
+      </map-info-window>
+    </google-map>
+  </div>
+</body>
+
+<!-- Topbar utilizzata per i pulsanti interattivi della mappa -->
+<div class="topbar">
+  <div class="topbar-button-control">
+    <a class="topbar-button" (click)="findMe()">
+      <span class="material-symbols-outlined"> my_location </span>
+      La mia posizione
+    </a>
+    <a class="topbar-button" (click)="showCluster()">
+      <span class="material-symbols-outlined"> pin_drop </span>
+      Mostra segnalazioni
+    </a>
+  </div>
+</div>

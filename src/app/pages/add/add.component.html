@@ -1,0 +1,107 @@
+<!-- Corpo pagina -->
+
+<body>
+  <section class="container" *ngIf="isSent===false && isSending===false">
+    <header>Aggiungi</header>
+    <form class="form" [formGroup]="reportForm">
+      <div class="column">
+        <div class="insert">
+          <label>Descrizione</label>
+          <input name="description" placeholder="Inserisci descrizione" formControlName="description"
+            [ngStyle]="descriptionStyle()" />
+          <span class="error"
+            *ngIf="(reportFormControl.description.touched || submitted) && reportFormControl.description.invalid">
+            <i class='bx bx-error-circle error-icon'></i>
+            <p class="error-text">La descrizione deve avere da 5 a 50 caratteri</p>
+          </span>
+        </div>
+      </div>
+
+      <!-- Colonna con selezione -->
+      <div class="column">
+        <div class="insert">
+          <label>Tipologia</label>
+          <select id="type" formControlName="trashType" [ngStyle]="typeStyle()">
+            <option value="{{typelist[i].type}}" *ngFor="let type of typelist; index as i">{{typelist[i].type}}</option>
+          </select>
+          <span class="error" *ngIf="submitted && reportFormControl.trashType.invalid">
+            <i class='bx bx-error-circle error-icon'></i>
+            <p class="error-text">Tipologia necessaria</p>
+          </span>
+        </div>
+        <div class="insert">
+          <label>Dimensione</label>
+          <select id="dimension" formControlName="trashSize" [ngStyle]="sizeStyle()">
+            <option value="{{sizelist[i].size}}" *ngFor="let size of sizelist; index as i">{{sizelist[i].size}}</option>
+          </select>
+          <span class="error" *ngIf="submitted && reportFormControl.trashSize.invalid">
+            <i class='bx bx-error-circle error-icon'></i>
+            <p class="error-text">Dimensione necessaria</p>
+          </span>
+        </div>
+      </div>
+
+      <!-- Sezione caricamento foto -->
+      <div class="button">
+        <button type="button" class="upload" *ngIf="isNotImage" (click)="clickUpload()">
+          <input id="inputupload" type="file" (change)="fileChangeEvent($event)" class="fileInputProfile"
+            id="file-input" accept="image/*" style="opacity:0;" formControlName="fileImage">
+          <a class="icon-text-upload" (click)="clickUpload()">
+            <span class="material-symbols-outlined">upload</span>
+            Carica foto
+          </a>
+        </button>
+
+        <!-- Pulsante per rimuovere l'immagine -->
+        <button type="button" class="removeimage" (click)="removeImage()" *ngIf="isImageSaved">
+          <a class="icon-text-button">
+            <span class="material-symbols-outlined"> close</span>
+            Rimuovi foto
+          </a>
+        </button>
+
+      </div>
+
+      <!-- Sezione anteprima immagine -->
+      <div class="img-space">
+        <ng-container *ngIf="isImageSaved;">
+          <img id="imagecontainer" [src]="cardImageBase64" alt="Immagine" />
+        </ng-container>
+      </div>
+
+      <!-- Colonna pulsanti -->
+      <div class="control">
+        <div class="button">
+          <button type="button" class="clear" (click)="clearData()">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined">delete</span>
+              Svuota
+            </a>
+          </button>
+        </div>
+        <div class="button">
+          <button type="button" class="send" (click)="formSubmit()">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined">send</span>
+              Invia
+            </a>
+          </button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <!-- Sezione messaggio di successo o di errore -->
+  <section class="containermessage" *ngIf="isSending">
+    <div class="message">
+      <h1>{{messageTitle}}</h1>
+      <p>{{messageBody}}</p>
+    </div>
+    <button class="close" (click)="reloadPage()" *ngIf="isSent">
+      <a class="icon-text-button">
+        <span class="material-symbols-outlined">close</span>
+        Chiudi
+      </a>
+    </button>
+  </section>
+</body>

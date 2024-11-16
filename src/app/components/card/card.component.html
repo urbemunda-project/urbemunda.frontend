@@ -1,0 +1,190 @@
+<section class="container">
+
+  <!-- Card di defualt con tutte le informazioni della segnalazione -->
+  <div class="card" *ngIf="isMain">
+    <div class="section">
+      <img class="card-image" src="data:image/png;base64, {{data.fileImage}}" alt="Immagine">
+      <div class="row-date">
+        <p id="creation">Data creazione</p>
+        <p id="clean">Data pulizia</p>
+      </div>
+      <div class="row-data">
+        <p id="creationdate">{{data.creationDate}}</p>
+        <p id="notcleandate" *ngIf="isCleaned">{{notCleaned}}</p>
+        <p id="cleandate" *ngIf="isNotCleaned">{{data.cleaningDate}}</p>
+      </div>
+      <div class="row">
+        <p id="size">{{data.trashSize}}</p>
+        <p id="type" [ngStyle]="{'background-color' : getColor(data.trashType)}">{{data.trashType}}</p>
+      </div>
+      <p id="description">{{data.description}}</p>
+    </div>
+    <button class="modifybutton" (click)="openModify()" *ngIf="isCleaned">
+      <a class="icon-text-button">
+        <span class="material-symbols-outlined">edit</span>
+        Modifica
+      </a>
+    </button>
+    <button class="reportcleanedbutton" *ngIf="isNotCleaned">
+      Pulita 😊
+    </button>
+  </div>
+
+  <!-- Card con i pulsanti di modifica -->
+  <div class="card" *ngIf="isSecond && isCleaned">
+    <p>{{data.description}}</p>
+    <div class="control">
+      <button class="clean" (click)="cleanReport()" *ngIf="admin">
+        <a class="icon-text-button">
+          <span class="material-symbols-outlined">mop</span>
+          Pulisci
+        </a>
+      </button>
+      <button class="delete" (click)="deleteReport()" *ngIf="normal">
+        <a class="icon-text-button">
+          <span class="material-symbols-outlined">delete</span>
+          Elimina
+        </a>
+      </button>
+      <button class="modify" (click)="modifyReport()" *ngIf="normal">
+        <a class="icon-text-button">
+          <span class="material-symbols-outlined">edit</span>
+          Modifica
+        </a>
+      </button>
+      <button class="close" (click)="closeModify()">
+        <a class="icon-text-button">
+          <span class="material-symbols-outlined">undo</span>
+          Chiudi
+        </a>
+      </button>
+    </div>
+  </div>
+
+  <!-- Card con le opzioni di modifica segnalazione -->
+  <div class="cardmodify" *ngIf="modify && isUpdating===false">
+    <form class="form" [formGroup]="reportForm">
+      <div class="column">
+        <div class="insert" id="descriptioninsert">
+          <label>Descrizione</label>
+          <input name="description" placeholder="Inserisci descrizione" formControlName="description"
+            [ngStyle]="descriptionStyle()" />
+          <span class="error"
+            *ngIf="(reportFormControl.description.touched || submitted) && reportFormControl.description.invalid">
+            <i class='bx bx-error-circle error-icon'></i>
+            <p class="error-text">La descrizione deve avere da 5 a 50 caratteri</p>
+          </span>
+        </div>
+      </div>
+
+      <!-- Colonna con selezione -->
+      <div class="column">
+        <div class="insert">
+          <label>Tipologia</label>
+          <select id="typeform" formControlName="trashType" [ngStyle]="typeStyle()">
+            <option value="{{typelist[i].type}}" *ngFor="let type of typelist; index as i">{{typelist[i].type}}</option>
+          </select>
+          <span class="error" *ngIf="submitted && reportFormControl.trashType.invalid">
+            <i class='bx bx-error-circle error-icon'></i>
+            <p class="error-text">Tipologia necessaria</p>
+          </span>
+        </div>
+        <div class="insert">
+          <label>Dimensione</label>
+          <select id="dimension" formControlName="trashSize" [ngStyle]="sizeStyle()">
+            <option value="{{sizelist[i].size}}" *ngFor="let size of sizelist; index as i">{{sizelist[i].size}}</option>
+          </select>
+          <span class="error" *ngIf="submitted && reportFormControl.trashSize.invalid">
+            <i class='bx bx-error-circle error-icon'></i>
+            <p class="error-text">Dimensione necessaria</p>
+          </span>
+        </div>
+      </div>
+
+      <!-- Sezione caricamento foto -->
+     <div class="button">
+      <button type="button" class="upload" *ngIf="isNotImage" (click)="clickUpload()">
+        <input id="inputupload" style="position: absolute; top: 0; left: 0; width: 100%; height:100%" type="file"
+          (change)="fileChangeEvent($event)" class="fileInputProfile" id="file-input" accept="image/*"
+          style="opacity:0;" formControlName="fileImage">
+        <a class="icon-text-upload" (click)="clickUpload()">
+          Carica foto
+        </a>
+      </button>
+
+      <!-- Pulsante per rimuovere l'immagine -->
+      <button type="button" class="removeimage" (click)="removeImage()" *ngIf="isImageSaved">
+        Rimuovi foto
+      </button>
+
+    </div>
+
+    </form>
+
+
+    <!-- Sezione anteprima immagine -->
+    <div class="img-space">
+      <ng-container *ngIf="isImageUpdated;">
+        <img id="imagecontainer" [src]="cardImageBase64" alt="Immagine" />
+      </ng-container>
+      <ng-container *ngIf="isImageNotUpdated;">
+        <img id="imagecontainer" src="data:image/png;base64, {{data.fileImage}}" alt="Immagine" />
+      </ng-container>
+    </div>
+
+    <!-- Colonna pulsanti  della Card Modify -->
+    <div class="controlmodify">
+      <div class="button">
+        <button type="button" class="back" (click)="backToModify()">
+          Indietro
+        </button>
+      </div>
+      <div class="button">
+        <button type="button" class="clear" (click)="clearData()">
+          Svuota
+        </button>
+      </div>
+      <div class="button">
+        <button type="button" class="send" (click)="formSubmit()">
+          Invia
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Card per la notifica dell'eliminazione segnalazione -->
+  <div class="cardmessage" id="cardmessage" *ngIf="isDeleteCard">
+    <div class="uselessspace" *ngIf="isSending===true && isSent===false"></div>
+    <div class="uselessspace" *ngIf="isSent===true"></div>
+    <div class="message">
+      <h1>{{messageTitle}}</h1>
+      <p>{{messageBody}}</p>
+    </div>
+    <div class="uselessspace" *ngIf="isSending===true && isSent===false"></div>
+    <button class="close" (click)="doReload()" *ngIf="isSent===true">
+      <a class="icon-text-button">
+        <span class="material-symbols-outlined">close</span>
+        Chiudi
+      </a>
+    </button>
+  </div>
+
+  <!-- Card per la notifica dell'aggiornamento segnalazione -->
+  <div class="cardmessage" id="cardmessage" *ngIf="isUpdating">
+    <div class="uselessspace" *ngIf="isUpdating===true && isSent===false"></div>
+    <div class="uselessspace" *ngIf="isSent===true"></div>
+    <div class="message">
+      <h1>{{messageTitle}}</h1>
+      <p>{{messageBody}}</p>
+    </div>
+    <div class="uselessspace" *ngIf="isUpdating===true && isSent===false"></div>
+    <button class="close" (click)="doReload()" *ngIf="isSent===true">
+      <a class="icon-text-button">
+        <span class="material-symbols-outlined">close</span>
+        Chiudi
+      </a>
+    </button>
+  </div>
+
+</section>

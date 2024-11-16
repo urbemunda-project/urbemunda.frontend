@@ -1,0 +1,74 @@
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="space" id="space">
+      <img class="logo" src="\assets\logo.png" alt="Urbe Munda" height="35px">
+      <div class="set" *ngIf="isNotLogged">
+        <div class="control">
+          <div class="button">
+            <button class="register" [routerLink]="['/signup']">
+              <a class="icon-text-button">
+                <span class="material-symbols-outlined">person</span>
+                Registrati
+              </a>
+            </button>
+          </div>
+          <div class="button">
+            <button class="accedi" onclick="waitAndRedirect(this, '/login')">
+              <a class="icon-text-button">
+                <span class="material-symbols-outlined">login</span>
+                Accedi
+              </a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Corpo pagina centrale -->
+  <div class="box">
+    <div class="container">
+      <header>Benvenuto su Urbe Munda ♻️</header>
+      <p>Urbe Munda è una piattaforma con cui puoi segnalare i rifiuti abbandonati nella tua città.
+        Gli operatori ecologici avranno a disposizione la posizione e la descrizione dei rifiuti.
+        Una volta eseguita la pulizia, la segnalazione verrà contrassegnata come pulita.
+      </p>
+    </div>
+
+    <!-- Ranking dei migliori utenti -->
+    <div class="ranking" id="ranking">
+      <div class="ranking-title">Utenti più eco-friendly 😊</div>
+      <div class="show" *ngFor="let rank of ranking; index as i">
+        <div class="row" *ngIf="i===0">
+          <div class="first">
+            <h1 id="position">🥇</h1>
+            <h1 id="name">{{rank.name}} {{rank.surname}}</h1>
+          </div>
+          <h1 id="report">{{rank.reportCount}}</h1>
+        </div>
+        <div class="row" *ngIf="i===1">
+          <div class="first">
+            <h1 id="position">🥈</h1>
+            <h1 id="name">{{rank.name}} {{rank.surname}}</h1>
+          </div>
+          <h1 id="report">{{rank.reportCount}}</h1>
+        </div>
+        <div class="row" *ngIf="i===2">
+          <div class="first">
+            <h1 id="position">🥉</h1>
+            <h1 id="name">{{rank.name}} {{rank.surname}}</h1>
+          </div>
+          <h1 id="report">{{rank.reportCount}}</h1>
+        </div>
+        <div class="row" *ngIf="i!==0 && i!==1 && i!==2">
+          <div class="first">
+            <h1 id="position" [ngStyle]="{'background-color' : 'black'}">{{i+1}}</h1>
+            <h1 id="name">{{rank.name}} {{rank.surname}}</h1>
+          </div>
+          <h1 id="report">{{rank.reportCount}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

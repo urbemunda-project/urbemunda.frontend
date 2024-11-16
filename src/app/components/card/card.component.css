@@ -1,0 +1,382 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-content: normal;
+  justify-content: flex-end;
+  text-align: center;
+  background-color: white;
+  width: 300px;
+  height: 400px;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.modifybutton {
+  position: relative;
+  bottom: 0px;
+  height: 50px;
+  width: 100%;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  background-color: #cfd8dc;
+}
+
+.reportcleanedbutton {
+  position: relative;
+  bottom: 0px;
+  height: 50px;
+  width: 100%;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  background-color: #cfd8dc;
+  font-size: 15px;
+}
+
+.control .clean {
+  height: 50px;
+  width: 100%;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  background-color: #009688;
+}
+
+.control .delete {
+  margin-top: 10px;
+  height: 50px;
+  width: 100%;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  background-color: #b71c1c;
+}
+
+.control .modify {
+  margin-top: 10px;
+  height: 50px;
+  width: 100%;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  background-color: #2979ff;
+}
+
+.control .close {
+  margin-top: 10px;
+  height: 50px;
+  width: 100%;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  background-color: #cfd8dc;
+}
+
+.card-image {
+  height: 200px;
+  width: 280px;
+  border-radius: 12px;
+}
+
+.card .row {
+  width: 100%;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.card .row-date {
+  margin-bottom: -40px;
+  width: 100%;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.card .row-data {
+  margin-top: -30px;
+  margin-bottom: -5px;
+  width: 100%;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}
+
+#size {
+  font-size: 12px;
+}
+
+#type {
+  color: white;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+#creation {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#clean {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#creationdate {
+  font-size: 11px;
+}
+
+#cleandate {
+  font-size: 11px;
+  background-color: green;
+  border-radius: 10px;
+  color: white;
+}
+
+#notcleandate {
+  font-size: 11px;
+  background-color: #b71c1c;
+  border-radius: 10px;
+  color: white;
+}
+
+#description {
+  margin-top: 10px;
+}
+
+/* Sezione modifica */
+.cardmodify {
+  display: flex;
+  flex-direction: column;
+  align-content: normal;
+  justify-content: space-between;
+  text-align: center;
+  background-color: white;
+  width: 300px;
+  height: 400px;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+
+.form .insert {
+  font-size: small;
+  font-weight: 400;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.form .insert input {
+  margin-top: 5px;
+  position: relative;
+  height: 30px;
+  width: 100%;
+  border: 1px solid #cfd8dc;
+  border-radius: 12px;
+  padding: 0 15px;
+}
+
+.form .insert input:focus {
+  outline: none;
+  border: 1px solid #bbdefb;
+  outline-color: #bbdefb;
+  background-color: #e3f2fd;
+}
+
+.form #descriptioninsert {
+  margin-top: -5px;
+}
+
+.form .insert select {
+  margin-top: 5px;
+  position: relative;
+  height: 30px;
+  width: 100%;
+  border: 1px solid #cfd8dc;
+  border-radius: 12px;
+  padding: 0 15px;
+}
+
+.form .insert select:focus {
+  outline: none;
+  border: 1px solid #bbdefb;
+  outline-color: #bbdefb;
+  background-color: #e3f2fd;
+}
+
+.insert .error {
+  display: flex;
+  margin-top: 3px;
+  color: #b71c1c;
+  font-size: 10px;
+  margin-bottom: -20px;
+}
+
+.error .error-icon {
+  margin-top: 6px;
+  margin-right: 2px;
+  font-size: 8px;
+}
+
+/* Upload foto */
+.button .upload {
+  margin-top: 10px;
+  margin-bottom: -20px;
+  height: 30px;
+  width: 100%;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  background-color: #80cbc4;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+.button .upload:hover {
+  opacity: 0.8;
+  box-shadow: 5px 5px 20px rgba(255, 255, 255, 0.25);
+}
+
+.icon-text-upload {
+  pointer-events: none;
+  transform: translate(0px, -15px);
+  min-width: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 10px;
+  text-decoration: none;
+}
+
+.img-space {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#imagecontainer {
+  height: 100%;
+  width: 100%;
+  max-height: 120px;
+  max-width: 170px;
+  border-radius: 5px;
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.removeimage {
+  margin-top: 10px;
+  height: 30px;
+  width: 100%;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  background-color: #b71c1c;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+/* Sezione pulsanti invio e svuota */
+.controlmodify {
+  margin-top: 10px;
+  width: 100%;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.button .back {
+  height: 30px;
+  width: 100%;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  background-color: #cfd8dc;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+.button .back:hover {
+  opacity: 0.8;
+  box-shadow: 5px 5px 20px rgba(255, 255, 255, 0.25);
+}
+
+.button .clear {
+  height: 30px;
+  width: 100%;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  background-color: #b71c1c;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+.button .clear:hover {
+  opacity: 0.8;
+  box-shadow: 5px 5px 20px rgba(255, 255, 255, 0.25);
+}
+
+.button .send {
+  height: 30px;
+  width: 100%;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  background-color: #2979ff;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+.button .send:hover {
+  opacity: 0.8;
+  box-shadow: 5px 5px 20px rgba(255, 255, 255, 0.25);
+}
+
+/* Messaggio */
+.cardmessage {
+  display: flex;
+  flex-direction: column;
+  align-content: normal;
+  justify-content: space-between;
+  text-align: center;
+  background-color: white;
+  width: 300px;
+  height: 400px;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.cardmessage .uselessspace {
+  height: 50px;
+  width: 100%;
+}
+
+.cardmessage .close {
+  margin-top: 10px;
+  height: 50px;
+  width: 100%;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  background-color: #cfd8dc;
+}

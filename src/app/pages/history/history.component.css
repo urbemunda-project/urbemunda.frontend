@@ -1,0 +1,137 @@
+body {
+  overflow: auto;
+  background-color: #eceff1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.empty {
+  text-align: center;
+  position: relative;
+  max-width: 500px;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transform: translate(0px, -27.5px);
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  width: 100%;
+}
+
+.top {
+  height: 50px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.bottom {
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 700px;
+  width: 100%;
+  height: 100%;
+}
+
+/* Paginazione */
+.toppagination {
+  height: 20px;
+  width: 100%;
+}
+
+.pagination {
+  font-size: 15px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pagination .pagebutton {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  height: 40px;
+  width: 40px;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  background-color: transparent;
+}
+
+/* Topbar con i comandi per l'ordinamento */
+.topbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.topbar-button-control {
+  position: relative;
+  margin: auto;
+  height: 55px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 700px;
+  padding: 0 15px 0 15px;
+  background-color: white;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  display: flex;
+}
+
+.topbar-button {
+  min-width: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 11px;
+  color: #444444;
+  text-decoration: none;
+}
+
+.topbar-button:hover {
+  background-color: #e8f0fe;
+  color: #2979ff;
+}
+
+/* Topbar Responsive */
+@media screen and (max-width: 700px) {
+  .topbar-button-control {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+}

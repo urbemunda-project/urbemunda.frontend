@@ -1,0 +1,89 @@
+<!-- Corpo della pagina -->
+
+<body>
+
+  <section class="container" *ngIf="isSent===false && isSending===false">
+    <header>Accesso</header>
+    <form class="form" name="editForm" role="form" novalidate (ngSubmit)="formSubmit()" [formGroup]="loginForm">
+      <!-- Email -->
+      <div class="insert">
+        <label>Email</label>
+        <input id="email" name="email" type="text" placeholder="Inserisci email" formControlName="email"
+          [ngStyle]="emailStyle()" />
+        <span class="error" *ngIf="(loginFormControl.email.touched || submitted) && loginFormControl.email.invalid">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">Email non valida</p>
+        </span>
+      </div>
+      <div class="insert">
+        <label>Password</label>
+        <input id="password" name="password" type="password" placeholder="Inserisci password" formControlName="password"
+          [ngStyle]="passwordStyle()" />
+        <span class="error"
+          *ngIf="(loginFormControl.password.touched || submitted) && loginFormControl.password.invalid">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">Da 8 a 16 caratteri e almeno un carattere minuscolo, un carattere maiuscolo e un numero
+          </p>
+        </span>
+      </div>
+      <!-- Colonna pulsanti -->
+      <div class="control">
+        <div class="button">
+          <button type="button" class="back" [routerLink]="['']">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined">arrow_back</span>
+              Indietro
+            </a>
+          </button>
+        </div>
+        <div class="button">
+          <button type="submit" class="access">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined">login</span>
+              Accedi
+            </a>
+          </button>
+        </div>
+      </div>
+      <div class="link">
+        <span>Non hai un account?<a href="signup">Registrati</a></span>
+      </div>
+      <div class="link">
+        <span>oppure</span>
+      </div>
+
+      <!-- Pulsante di accesso con Google -->
+      <div class="google">
+        <div id="g_id_onload"
+          data-client_id="2003874951-h28l7b08i9e4fdh7re4s67lefch6u4br.apps.googleusercontent.com"
+          data-callback="handleCredentialResponse"
+          data-auto_prompt="true">
+        </div>
+        <div class="g_id_signin"
+          data-type="standard"
+          data-size="large"
+          data-theme="outline"
+          data-text="sign_in_with"
+          data-shape="pill"
+          data-logo_alignment="left">
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <!-- Sezione messaggio di successo o errore -->
+  <section class="containermessage" *ngIf="isSending">
+    <div class="message">
+      <h1>{{messageTitle}}</h1>
+      <p>{{messageBody}}</p>
+      <p *ngFor="let text of message; index as i">{{message[i]}}</p>
+    </div>
+    <button class="close" (click)="goToHomepage()" *ngIf="isSent">
+      <a class="icon-text-button">
+        <span class="material-symbols-outlined">close</span>
+        Chiudi
+      </a>
+    </button>
+  </section>
+
+</body>

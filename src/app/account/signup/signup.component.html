@@ -1,0 +1,172 @@
+<!-- Corpo della pagina -->
+
+<body>
+
+  <!-- Prima sezione -->
+  <section class="container1" id="container1">
+    <header>Registrazione</header>
+    <form class="form" name="signupForm" role="form" [formGroup]="signupForm">
+      <div class="insert">
+        <label>Nome</label>
+        <input id="name" type="text" placeholder="Inserisci nome" formControlName="name" [ngStyle]="nameStyle()" />
+        <span class="error" *ngIf="(signupFormControl.name.touched || submitted1) && signupFormControl.name.invalid">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">Nome mancante</p>
+        </span>
+      </div>
+      <div class="insert">
+        <label>Cognome</label>
+        <input id="surname" type="text" placeholder="Inserisci cognome" formControlName="surname"
+          [ngStyle]="surnameStyle()" />
+        <span class="error"
+          *ngIf="(signupFormControl.surname.touched || submitted1) && signupFormControl.surname.invalid">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">Cognome mancante</p>
+        </span>
+      </div>
+      <div class="insert">
+        <label>Data di nascita</label>
+        <input id="date" type="date" placeholder="Inserisci data di nascita" formControlName="birth"
+          [ngStyle]="birthStyle()" />
+        <span class="error" *ngIf="(signupFormControl.birth.touched || submitted1) && signupFormControl.birth.invalid">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">Data non valida</p>
+        </span>
+      </div>
+      <div class="insert">
+        <label>Codice fiscale</label>
+        <input id="cf" type="text" placeholder="Inserisci codice fiscale" formControlName="cf" [ngStyle]="cfStyle()" />
+        <span class="error" *ngIf="(signupFormControl.cf.touched || submitted1) && signupFormControl.cf.invalid">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">Codice fiscale non valido</p>
+        </span>
+      </div>
+      <div class="link">
+        <span>Hai già un account?<a href="login">Accedi</a></span>
+      </div>
+      <div class="link">
+        <span>oppure</span>
+      </div>
+      <div class="link">
+        <span><a href="login">Accedi con Google</a></span>
+      </div>
+
+      <!-- Colonna pulsanti -->
+      <div class="control">
+        <div class="button">
+          <button type="button" class="abort" [routerLink]="['']">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined">close</span>
+              Annulla
+            </a>
+          </button>
+        </div>
+        <div class="button">
+          <button type="button" class="register" (click)="nextData()">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined">navigate_next</span>
+              continua
+            </a>
+          </button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <!-- Seconda sezione -->
+  <section class="container2" id="container2" *ngIf="isSending===false">
+    <header>Registrazione</header>
+    <form class="form" name="signupForm" role="form" [formGroup]="signupForm" autocomplete="off">
+      <!-- Email -->
+      <div class="insert">
+        <label>Email</label>
+        <input id="email" type="text" placeholder="Inserisci email" formControlName="email" [ngStyle]="emailStyle()" />
+        <span class="error" *ngIf="(signupFormControl.email.touched || submitted2) && signupFormControl.email.invalid">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">Email non valida</p>
+        </span>
+      </div>
+      <div class="insert">
+        <label>Verifica email</label>
+        <input id="emailcheck" type="text" placeholder="Inserisci email" formControlName="emailcheck"
+          [ngStyle]="emailCheckStyle()" />
+        <span class="error" *ngIf="(signupFormControl.emailcheck.touched || submitted2) &&
+        signupFormControl.emailcheck.value !== signupFormControl.email.value">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">L'email non corrisponde</p>
+        </span>
+      </div>
+      <div class="insert">
+        <label>Password</label>
+        <input id="password" type="password" placeholder="Inserisci password" formControlName="password"
+          [ngStyle]="passwordStyle()" />
+        <span class="error"
+          *ngIf="(signupFormControl.password.touched || submitted2) && signupFormControl.password.invalid">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">Da 8 a 16 caratteri e almeno un carattere minuscolo, un carattere maiuscolo e un numero
+          </p>
+        </span>
+      </div>
+      <div class="insert">
+        <label>Verifica password</label>
+        <input id="passwordcheck" type="password" placeholder="Inserisci password" formControlName="passwordcheck"
+          [ngStyle]="passwordCheckStyle()" />
+        <span class="error" *ngIf="(signupFormControl.passwordcheck.touched || submitted2) &&
+          signupFormControl.passwordcheck.value !== signupFormControl.password.value">
+          <i class='bx bx-error-circle error-icon'></i>
+          <p class="error-text">La password non corrisponde</p>
+        </span>
+      </div>
+      <div class="link">
+        <span>Hai già un account?<a href="login">Accedi</a></span>
+      </div>
+      <div class="link">
+        <span>oppure</span>
+      </div>
+      <div class="link">
+        <span><a href="login">Accedi con Google</a></span>
+      </div>
+
+      <!-- Colonna pulsanti -->
+      <div class="control">
+        <div class="button">
+          <button type="button" class="back" (click)="previousData()">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined">arrow_back</span>
+              Indietro
+            </a>
+          </button>
+        </div>
+        <div class="button">
+          <button type="button" class="register" (click)="formSubmit()">
+            <a class="icon-text-button">
+              <span class="material-symbols-outlined">person</span>
+              Registrati
+            </a>
+          </button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <!-- Sezione messaggio di successo o errore -->
+  <section class="containermessage" *ngIf="isSending">
+    <div class="message">
+      <h1>{{messageTitle}}</h1>
+      <p>{{messageBody}}</p>
+    </div>
+    <button class="login" onclick="waitAndRedirect(this, '/login')" *ngIf="isSuccess===true">
+      <a class="icon-text-button">
+        <span class="material-symbols-outlined">login</span>
+        Accedi
+      </a>
+    </button>
+    <button class="close" (click)="goToHomepage()" *ngIf="isSuccess===false">
+      <a class="icon-text-button">
+        <span class="material-symbols-outlined">close</span>
+        Chiudi
+      </a>
+    </button>
+  </section>
+
+</body>

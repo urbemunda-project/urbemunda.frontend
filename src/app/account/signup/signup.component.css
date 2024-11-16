@@ -1,0 +1,204 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+  background-image: url('/assets/background.jpg');
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container1 {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.container1 header {
+  text-align: center;
+  font-size: x-large;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.container2 {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  display: none;
+  visibility: hidden;
+}
+
+.container2 header {
+  text-align: center;
+  font-size: x-large;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.form .insert {
+  font-size: medium;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form .insert input {
+  margin-top: 5px;
+  position: relative;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #cfd8dc;
+  border-radius: 12px;
+  padding: 0 15px;
+}
+
+.insert .error {
+  display: flex;
+  margin-top: 3px;
+  color: #b71c1c;
+  font-size: 12px;
+  margin-bottom: -20px;
+}
+
+.error .error-icon {
+  margin-top: 3px;
+  margin-right: 6px;
+  font-size: 13px;
+}
+
+/* Stile input durante inserimento */
+.form .insert input:focus {
+  outline: none;
+  border: 1px solid #bbdefb;
+  background-color: #e3f2fd;
+}
+
+.form .button {
+  margin-top: 20px;
+}
+
+.button .abort {
+  height: 50px;
+  width: 100%;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #b71c1c;
+  transition: opacity 0.15s, box-shadow 1s;
+}
+
+.button .abort:hover {
+  opacity: 0.85;
+  box-shadow: 5px 5px 20px rgba(255, 255, 255, 0.25);
+}
+
+.button .back {
+  height: 50px;
+  width: 100%;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #e8f0fe;
+  transition: opacity 0.15s, box-shadow 1s;
+}
+
+.button .back:hover {
+  opacity: 0.8;
+  box-shadow: 5px 5px 20px rgba(255, 255, 255, 0.25);
+}
+
+.button .register {
+  height: 50px;
+  width: 100%;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #2979ff;
+  transition: opacity 0.15s, box-shadow 0.8s;
+}
+
+.button .register:hover {
+  opacity: 0.85;
+  box-shadow: 5px 5px 20px rgba(255, 255, 255, 0.25);
+}
+
+.link {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.link a {
+  text-decoration: none;
+  color: #2979ff;
+  margin-left: 10px;
+}
+
+.form .control {
+  width: 100%;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.google {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Messaggio di successo o errore */
+.containermessage {
+  display: flex;
+  flex-direction: column;
+  align-content: normal;
+  justify-content: space-between;
+  position: relative;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transform: translate(0px, -27.5px);
+}
+
+.containermessage .login {
+  margin-top: 20px;
+  height: 50px;
+  width: 100%;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  background-color: #2979ff;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+.containermessage .close {
+  margin-top: 20px;
+  height: 50px;
+  width: 100%;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  background-color: #cfd8dc;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}

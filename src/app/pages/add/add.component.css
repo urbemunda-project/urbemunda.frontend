@@ -1,0 +1,238 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+  background-image: url('/assets/background.jpg');
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: auto;
+}
+
+.container {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transform: translate(0px, -27.5px);
+}
+
+.container header {
+  text-align: center;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.container .form {
+  margin-top: 10px;
+}
+
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+
+.form .insert {
+  font-size: medium;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form .insert input {
+  margin-top: 5px;
+  position: relative;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #cfd8dc;
+  border-radius: 12px;
+  padding: 0 15px;
+}
+
+.form .insert input:focus {
+  outline: none;
+  border: 1px solid #bbdefb;
+  outline-color: #bbdefb;
+  background-color: #e3f2fd;
+}
+
+.form .insert select {
+  margin-top: 5px;
+  position: relative;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #cfd8dc;
+  border-radius: 12px;
+  padding: 0 15px;
+}
+
+.form .insert select:focus {
+  outline: none;
+  border: 1px solid #bbdefb;
+  outline-color: #bbdefb;
+  background-color: #e3f2fd;
+}
+
+.insert .error {
+  display: flex;
+  margin-top: 3px;
+  color: #b71c1c;
+  font-size: 12px;
+  margin-bottom: -20px;
+}
+
+.error .error-icon {
+  margin-top: 3px;
+  margin-right: 6px;
+  font-size: 13px;
+}
+
+/* Upload foto */
+#inputupload {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%
+}
+
+.button .upload {
+  margin-top: 20px;
+  margin-bottom: -20px;
+  height: 50px;
+  width: 100%;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  background-color: #80cbc4;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+.button .upload:hover {
+  opacity: 0.8;
+  box-shadow: 5px 5px 20px rgba(255, 255, 255, 0.25);
+}
+
+.icon-text-upload {
+  pointer-events: none;
+  transform: translate(0px, -15px);
+  min-width: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 10px;
+  text-decoration: none;
+}
+
+.img-space {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#imagecontainer {
+  height: 100%;
+  width: 100%;
+  max-height: 200px;
+  max-width: 280px;
+  border-radius: 5px;
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.removeimage {
+  margin-top: 20px;
+  height: 50px;
+  width: 100%;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  background-color: #b71c1c;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+/* Sezione pulsanti invio e svuota */
+.form .control {
+  margin-top: 20px;
+  width: 100%;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.button .clear {
+  height: 50px;
+  width: 100%;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  background-color: #b71c1c;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+.button .clear:hover {
+  opacity: 0.8;
+  box-shadow: 5px 5px 20px rgba(255, 255, 255, 0.25);
+}
+
+.button .send {
+  height: 50px;
+  width: 100%;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  background-color: #2979ff;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+.button .send:hover {
+  opacity: 0.8;
+  box-shadow: 5px 5px 20px rgba(255, 255, 255, 0.25);
+}
+
+/* Messaggio di successo o errore */
+.containermessage {
+  display: flex;
+  flex-direction: column;
+  align-content: normal;
+  justify-content: space-between;
+  position: relative;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transform: translate(0px, -27.5px);
+}
+
+.containermessage .close {
+  margin-top: 20px;
+  height: 50px;
+  width: 100%;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  background-color: #cfd8dc;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
